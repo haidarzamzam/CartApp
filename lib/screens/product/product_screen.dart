@@ -3,12 +3,13 @@ import 'dart:convert';
 import 'package:cart_app/bloc/product/product_cubit.dart';
 import 'package:cart_app/bloc/product/product_state.dart';
 import 'package:cart_app/models/product_model.dart';
+import 'package:cart_app/screens/detail_product/detail_product_screen.dart';
 import 'package:cart_app/utils/widget_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
-part 'package:cart_app/screens/product/widgets/item_product.dart';
+part 'package:cart_app/screens/product/widget/item_product.dart';
 
 class ProductScreen extends StatelessWidget {
   final _productCubit = ProductCubit();
@@ -17,7 +18,10 @@ class ProductScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Product"),
+          title: Text(
+            "Product",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           backgroundColor: Colors.white,
           centerTitle: true,
           actions: [
@@ -33,9 +37,9 @@ class ProductScreen extends StatelessWidget {
               listener: (context, state) {
                 if (state is LoadingProductState) {
                 } else if (state is SuccessProductState) {
-                  Get.snackbar('Hi', 'Success');
+                  Get.snackbar('Information', 'Success Get Data');
                 } else if (state is FailureProductState) {
-                  Get.snackbar('Hi', 'Failure');
+                  Get.snackbar('Information', 'Failure Get Data');
                 }
               },
               child: FutureBuilder<ProductModel>(
@@ -52,11 +56,16 @@ class ProductScreen extends StatelessWidget {
                           itemBuilder: (context, index) {
                             List<dynamic> dataImage =
                                 jsonDecode(snapshot.data.products[index].image);
-                            return _ItemProduct(
-                              name: snapshot.data.products[index].name,
-                              image: dataImage[0]['url'],
-                              price: double.parse(
-                                  snapshot.data.products[index].price),
+                            return GestureDetector(
+                              onTap: () => Get.to(DetailProductScreen(
+                                productModel: snapshot.data.products[index],
+                              )),
+                              child: _ItemProduct(
+                                name: snapshot.data.products[index].name,
+                                image: dataImage[0]['url'],
+                                price: double.parse(
+                                    snapshot.data.products[index].price),
+                              ),
                             );
                           },
                         );
