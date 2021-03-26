@@ -19,17 +19,11 @@ class ProductScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Product",
+            "Daftar Produk",
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           backgroundColor: Colors.white,
           centerTitle: true,
-          actions: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(Icons.shopping_cart),
-            )
-          ],
         ),
         body: BlocProvider<ProductCubit>(
           create: (context) => _productCubit,
@@ -57,9 +51,10 @@ class ProductScreen extends StatelessWidget {
                             List<dynamic> dataImage =
                                 jsonDecode(snapshot.data.products[index].image);
                             return GestureDetector(
-                              onTap: () => Get.to(DetailProductScreen(
-                                productModel: snapshot.data.products[index],
-                              )),
+                              onTap: () =>
+                                  Get.to(DetailProductScreen(
+                                    productModel: snapshot.data.products[index],
+                                  ),),
                               child: _ItemProduct(
                                 name: snapshot.data.products[index].name,
                                 image: dataImage[0]['url'],

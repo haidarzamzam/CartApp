@@ -56,7 +56,7 @@ class _Carousel extends StatelessWidget {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: _currentNotifier.value == index
-                                ? Colors.orange
+                                ? Colors.black
                                 : Colors.grey,
                           ),
                         );
