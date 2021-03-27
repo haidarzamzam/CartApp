@@ -49,6 +49,15 @@ class _ContainerInformation extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Text("Terjual", style: TextStyle(fontSize: 16)),
+                Text(productModel.sold,
+                    style: TextStyle(fontSize: 16, color: Colors.black54)),
+              ],
+            ),
+            SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
                 Text("Peringkat", style: TextStyle(fontSize: 16)),
                 Text(productModel.rating,
                     style: TextStyle(fontSize: 16, color: Colors.black54)),

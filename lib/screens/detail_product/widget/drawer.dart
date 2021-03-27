@@ -44,14 +44,14 @@ class _CartDrawer extends StatelessWidget {
             child: data.isEmpty
                 ? Center(child: Text("Tidak ada barang"))
                 : ListView.builder(
-                itemCount: data.length ?? 0,
-                itemBuilder: (context, index) {
-                  List<dynamic> dataImage = jsonDecode(data[index].image);
-                  return Slidable(
-                    actionPane: SlidableDrawerActionPane(),
-                    actionExtentRatio: 0.25,
-                    child: Container(
-                      color: Colors.white,
+                    itemCount: data.length ?? 0,
+                    itemBuilder: (context, index) {
+                      List<dynamic> dataImage = jsonDecode(data[index].image);
+                      return Slidable(
+                        actionPane: SlidableDrawerActionPane(),
+                        actionExtentRatio: 0.25,
+                        child: Container(
+                          color: Colors.white,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -119,13 +119,12 @@ class _CartDrawer extends StatelessWidget {
                                           data[index].variant[indexChild]);
                                     }),
                               ),
-                              SizedBox(height: 8)
-                            ],
-                          ),
-                        ),
+                          SizedBox(height: 8)
+                        ],
+                      ),
+                    ),
                     secondaryActions: <Widget>[
                       IconSlideAction(
-
                         caption: 'Ubah',
                         color: Colors.blue,
                         icon: Icons.edit,
