@@ -26,6 +26,17 @@ class AddCartEvent extends CartEvent {
   String toString() => 'AddCartEvent';
 }
 
+class EditCartEvent extends CartEvent {
+  final String id;
+  final int qty;
+  final String title;
+
+  EditCartEvent({this.id, this.qty, this.title});
+
+  @override
+  String toString() => 'EditCartEvent';
+}
+
 class RemoveCartEvent extends CartEvent {
   final CartModel data;
 

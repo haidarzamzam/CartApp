@@ -6,6 +6,7 @@ import 'package:cart_app/models/cart_model.dart';
 import 'package:cart_app/models/product_model.dart';
 import 'package:cart_app/utils/widget_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
@@ -51,10 +52,15 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
         } else if (state is AddCartState) {
           final tile = state.data.firstWhere((item) => item.id == state.id);
           Get.snackbar(
-              "Informasi", "Sukses menambahkan ke keranjang : ${tile.title}");
+              "Informasi", "Sukses menambahkan ke keranjang : ${tile.title}",
+              backgroundColor: Colors.green);
           _cartModel = state.data;
         } else if (state is RemoveCartState) {
-          Get.snackbar("Informasi", "Berhasil menghapus ${state.title}");
+          Get.snackbar("Informasi", "Berhasil menghapus ${state.title}",
+              backgroundColor: Colors.green);
+        } else if (state is EditCartState) {
+          Get.snackbar("Informasi", "Berhasil mengubah ${state.title}",
+              backgroundColor: Colors.green);
         }
       },
       child: BlocBuilder(
@@ -71,7 +77,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                 leading: IconButton(
                   icon: Icon(Icons.arrow_back_ios),
                   onPressed: () {
-                    Get.back(result: _cartModel);
+                    Get.back();
                   },
                 ),
                 centerTitle: true,

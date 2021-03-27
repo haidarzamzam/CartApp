@@ -23,6 +23,12 @@ class AddCartState extends CartState {
   AddCartState({this.data, this.id});
 }
 
+class EditCartState extends CartState {
+  final String title;
+
+  EditCartState({this.title});
+}
+
 class RemoveCartState extends CartState {
   final String title;
 

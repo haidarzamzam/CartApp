@@ -36,10 +36,12 @@ class _ProductScreenState extends State<ProductScreen> {
         if (state is GetDataProductSuccessState) {
           _isLoading = false;
           _productModel = state.data.products;
-          Get.snackbar("Informasi", "Get Data Produk Berhasil");
+          Get.snackbar("Informasi", "Get Data Produk Berhasil",
+              backgroundColor: Colors.green);
         } else if (state is GetDataProductFailureState) {
           _isLoading = false;
-          Get.snackbar("Informasi", "Get Data Produk Gagal");
+          Get.snackbar("Informasi", "Get Data Produk Gagal",
+              backgroundColor: Colors.red);
         }
       },
       child: BlocBuilder(

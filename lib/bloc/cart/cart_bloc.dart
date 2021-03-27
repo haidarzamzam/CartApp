@@ -20,6 +20,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
       yield* _addCart(event);
     } else if (event is RemoveCartEvent) {
       yield* _removeCart(event);
+    } else if (event is EditCartEvent) {
+      yield* _editCart(event);
     }
   }
 
@@ -32,7 +34,8 @@ class CartBloc extends Bloc<CartEvent, CartState> {
   Stream<CartState> _addCart(AddCartEvent event) async* {
     yield CartInitial();
 
-    var contain = cart.where((item) => item.id == event.data.id);
+    var contain = cart.where((item) =>
+        item.id == event.data.id || item.variant == event.data.variant);
 
     if (contain.isEmpty) {
       cart.add(event.data);
@@ -44,10 +47,20 @@ class CartBloc extends Bloc<CartEvent, CartState> {
     yield AddCartState(data: cart, id: event.data.id);
   }
 
+  Stream<CartState> _editCart(EditCartEvent event) async* {
+    yield CartInitial();
+
+    final tile = cart.firstWhere((item) => item.id == event.id);
+    tile.quantity = event.qty;
+
+    yield EditCartState(title: event.title);
+  }
+
   Stream<CartState> _removeCart(RemoveCartEvent event) async* {
     yield CartInitial();
 
-    cart.removeWhere((item) => item.id == event.data.id);
+    cart.removeWhere((item) =>
+        item.id == event.data.id && item.variant == event.data.variant);
 
     yield RemoveCartState(title: event.data.title);
   }

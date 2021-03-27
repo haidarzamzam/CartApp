@@ -4,7 +4,7 @@ class CartModel {
   final String title;
   int quantity;
   final double price;
-  final String variant;
+  final List<String> variant;
 
   CartModel(
       {this.id,
