@@ -6,7 +6,6 @@ import 'package:cart_app/screens/detail_product/detail_product_screen.dart';
 import 'package:cart_app/utils/widget_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:get/get.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
@@ -37,10 +36,10 @@ class _ProductScreenState extends State<ProductScreen> {
         if (state is GetDataProductSuccessState) {
           _isLoading = false;
           _productModel = state.data;
-          Get.snackbar("Informasi", "Get Data Berhasil");
+          Get.snackbar("Informasi", "Get Data Produk Berhasil");
         } else if (state is GetDataProductFailureState) {
           _isLoading = false;
-          Get.snackbar("Informasi", "Get Data Gagal");
+          Get.snackbar("Informasi", "Get Data Produk Gagal");
         }
       },
       child: BlocBuilder(

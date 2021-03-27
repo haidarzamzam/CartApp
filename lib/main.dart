@@ -1,3 +1,4 @@
+import 'package:cart_app/bloc/cart/bloc.dart';
 import 'package:cart_app/bloc/product/bloc.dart';
 import 'package:cart_app/screens/product/product_screen.dart';
 import 'package:cart_app/utils/end_point.dart';
@@ -28,6 +29,7 @@ class _MyAppState extends State<MyApp> {
       providers: [
         BlocProvider<ProductBloc>(
             create: (BuildContext context) => ProductBloc()),
+        BlocProvider<CartBloc>(create: (BuildContext context) => CartBloc()),
       ],
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,

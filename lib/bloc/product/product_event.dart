@@ -11,3 +11,4 @@ class GetProductEvent extends ProductEvent {
   @override
   String toString() => 'GetProductEvent';
 }
+
