@@ -11,17 +11,11 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 
 part 'package:cart_app/screens/detail_product/widget/carousel.dart';
-
 part 'package:cart_app/screens/detail_product/widget/cart_counter_badge.dart';
-
 part 'package:cart_app/screens/detail_product/widget/container_bottom.dart';
-
 part 'package:cart_app/screens/detail_product/widget/container_description.dart';
-
 part 'package:cart_app/screens/detail_product/widget/container_information.dart';
-
 part 'package:cart_app/screens/detail_product/widget/container_main.dart';
-
 part 'package:cart_app/screens/detail_product/widget/drawer.dart';
 
 class DetailProductScreen extends StatefulWidget {
@@ -77,7 +71,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                 leading: IconButton(
                   icon: Icon(Icons.arrow_back_ios),
                   onPressed: () {
-                    Navigator.of(context).pop();
+                    Get.back(result: _cartModel);
                   },
                 ),
                 centerTitle: true,

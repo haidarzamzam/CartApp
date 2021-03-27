@@ -18,7 +18,7 @@ class ProductScreen extends StatefulWidget {
 
 class _ProductScreenState extends State<ProductScreen> {
   ProductBloc _productBloc;
-  ProductModel _productModel;
+  List<Products> _productModel = List();
   bool _isLoading = true;
 
   @override
@@ -35,7 +35,7 @@ class _ProductScreenState extends State<ProductScreen> {
       listener: (context, state) {
         if (state is GetDataProductSuccessState) {
           _isLoading = false;
-          _productModel = state.data;
+          _productModel = state.data.products;
           Get.snackbar("Informasi", "Get Data Produk Berhasil");
         } else if (state is GetDataProductFailureState) {
           _isLoading = false;
@@ -46,48 +46,79 @@ class _ProductScreenState extends State<ProductScreen> {
           bloc: _productBloc,
           builder: (context, state) {
             return Scaffold(
-                appBar: AppBar(
-                  title: Text(
-                    "Daftar Produk",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  backgroundColor: Colors.white,
-                  centerTitle: true,
+              appBar: AppBar(
+                title: Text(
+                  "Daftar Produk",
+                  style: TextStyle(fontWeight: FontWeight.bold),
                 ),
-                body: !_isLoading
-                    ? LoadingOverlay(
-                        isLoading: _isLoading,
-                        child: GridView.builder(
-                          itemCount: _productModel.products.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent: 200.0,
-                                  childAspectRatio: 0.9),
-                          itemBuilder: (context, index) {
-                            List<dynamic> dataImage =
-                                jsonDecode(_productModel.products[index].image);
-                            return GestureDetector(
-                              onTap: () => Get.to(
-                                DetailProductScreen(
-                                  productModel: _productModel.products[index],
+                backgroundColor: Colors.white,
+                centerTitle: true,
+              ),
+              body: !_isLoading
+                  ? LoadingOverlay(
+                      isLoading: _isLoading,
+                      child: _productModel.isNotEmpty
+                          ? GridView.builder(
+                              itemCount: _productModel.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithMaxCrossAxisExtent(
+                                      maxCrossAxisExtent: 200.0,
+                                      childAspectRatio: 0.9),
+                              itemBuilder: (context, index) {
+                                List<dynamic> dataImage =
+                                    jsonDecode(_productModel[index].image);
+                                return GestureDetector(
+                                  onTap: () => Get.to(
+                                    DetailProductScreen(
+                                      productModel: _productModel[index],
+                                    ),
+                                  ),
+                                  child: _ItemProduct(
+                                    name: _productModel[index].name,
+                                    image: dataImage[0]['url'],
+                                    price: double.parse(
+                                        _productModel[index].price),
+                                  ),
+                                );
+                              },
+                            )
+                          : Center(
+                              child: SizedBox(
+                                width: 200,
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    MaterialButton(
+                                      onPressed: () {
+                                        _productBloc.add(GetProductEvent());
+                                      },
+                                      disabledColor: Colors.white,
+                                      color: Colors.white,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(Icons.refresh),
+                                          SizedBox(width: 8),
+                                          Text("Ulangi lagi",
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w700)),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                              child: _ItemProduct(
-                                name: _productModel.products[index].name,
-                                image: dataImage[0]['url'],
-                                price: double.parse(
-                                    _productModel.products[index].price),
-                              ),
-                            );
-                          },
-                        ),
-                      )
-                    : LoadingOverlay(
-                        isLoading: _isLoading,
-                        child: Container(
-                          color: Colors.white,
-                        ),
-                      ));
+                            ),
+                    )
+                  : LoadingOverlay(
+                      isLoading: _isLoading,
+                      child: Container(
+                        color: Colors.white,
+                      ),
+                    ),
+            );
           }),
     );
   }
