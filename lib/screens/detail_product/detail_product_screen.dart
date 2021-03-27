@@ -2,11 +2,10 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cart_app/models/product_model.dart';
 import 'package:cart_app/utils/widget_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 part 'package:cart_app/screens/detail_product/widget/carousel.dart';
-
 part 'package:cart_app/screens/detail_product/widget/cart_counter_badge.dart';
-
 part 'package:cart_app/screens/detail_product/widget/drawer.dart';
 
 class DetailProductScreen extends StatelessWidget {
@@ -17,7 +16,7 @@ class DetailProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade300,
+      backgroundColor: Colors.grey.shade200,
       appBar: AppBar(
         title: Text(
           "Detail Produk",
@@ -65,9 +64,10 @@ class DetailProductScreen extends StatelessWidget {
                     children: [
                       Padding(
                         padding:
-                            const EdgeInsets.only(left: 16, right: 16, top: 16),
+                        const EdgeInsets.only(left: 16, right: 16, top: 16),
                         child: Text(
-                          "Rp ${WidgetUtil().formattedMoneyIDR(double.parse(productModel.price))}",
+                          "Rp ${WidgetUtil().formattedMoneyIDR(double.parse(
+                              productModel.price))}",
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),
@@ -82,14 +82,14 @@ class DetailProductScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 16,
+                  height: 12,
                 ),
                 //Product Information
                 Container(
                   decoration: BoxDecoration(color: Colors.white),
                   child: Padding(
                     padding:
-                        const EdgeInsets.only(left: 16, right: 16, top: 16),
+                    const EdgeInsets.only(left: 16, right: 16, top: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -144,13 +144,13 @@ class DetailProductScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  height: 16,
+                  height: 12,
                 ),
                 Container(
                   decoration: BoxDecoration(color: Colors.white),
                   child: Padding(
                     padding:
-                        const EdgeInsets.only(left: 16, right: 16, top: 16),
+                    const EdgeInsets.only(left: 16, right: 16, top: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -204,7 +204,9 @@ class DetailProductScreen extends StatelessWidget {
                       color: Colors.white,
                     ),
                     child: MaterialButton(
-                      onPressed: () {},
+                      onPressed: () {
+
+                      },
                       disabledColor: Colors.white,
                       color: Colors.white,
                       child: Row(

@@ -15,7 +15,7 @@ class _CartDrawer extends StatelessWidget {
                   leading: IconButton(
                     icon: Icon(Icons.clear),
                     onPressed: () {
-                      Navigator.of(context).pop();
+                      Get.back();
                     },
                   ),
                   title: Row(
@@ -23,14 +23,19 @@ class _CartDrawer extends StatelessWidget {
                     children: <Widget>[
                       Icon(Icons.shopping_cart),
                       Text(
-                        'Cart',
-                        style: Theme.of(context).textTheme.title,
+                        'Keranjang',
                       )
                     ],
                   ),
-                  onTap: () {},
                 )),
           ),
+          Expanded(
+            child: ListView.builder(
+                itemCount: 10,
+                itemBuilder: (context, index) {
+                  return Text("$index");
+                }),
+          )
         ],
       ),
     );

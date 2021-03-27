@@ -2,38 +2,22 @@ import 'package:cart_app/models/product_model.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class ProductState extends Equatable {
+  const ProductState();
+
   @override
   List<Object> get props => [];
 }
 
-class InitialProductState extends ProductState {}
+class ProductInitial extends ProductState {}
 
-class LoadingProductState extends ProductState {}
-
-class SuccessProductState extends ProductState {
+class GetDataProductSuccessState extends ProductState {
   final ProductModel data;
 
-  SuccessProductState(this.data);
-
-  @override
-  List<Object> get props => [data];
-
-  @override
-  String toString() {
-    return 'SuccessProductState{errorMessage: $data}';
-  }
+  GetDataProductSuccessState({this.data});
 }
 
-class FailureProductState extends ProductState {
-  final String errorMessage;
+class GetDataProductFailureState extends ProductState {
+  final String message;
 
-  FailureProductState(this.errorMessage);
-
-  @override
-  List<Object> get props => [errorMessage];
-
-  @override
-  String toString() {
-    return 'FailureProductState{errorMessage: $errorMessage}';
-  }
+  GetDataProductFailureState({this.message});
 }

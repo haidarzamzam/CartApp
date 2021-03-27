@@ -1,6 +1,8 @@
+import 'package:cart_app/bloc/product/bloc.dart';
 import 'package:cart_app/screens/product/product_screen.dart';
 import 'package:cart_app/utils/end_point.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 import 'app.dart';
@@ -22,13 +24,19 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.grey,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ProductBloc>(
+            create: (BuildContext context) => ProductBloc()),
+      ],
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          primarySwatch: Colors.grey,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: ProductScreen(),
       ),
-      home: ProductScreen(),
     );
   }
 }

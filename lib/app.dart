@@ -1,4 +1,6 @@
+import 'package:cart_app/bloc/bloc_delegate.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
 
 class App {
@@ -20,6 +22,8 @@ class App {
   }
 
   Future<Null> init() async {
+    BlocSupervisor.delegate = SimpleBlocDelegate();
+
     dio = Dio(BaseOptions(
         baseUrl: apiBaseURL,
         connectTimeout: 10000,
